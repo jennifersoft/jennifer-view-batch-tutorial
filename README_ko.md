@@ -30,6 +30,8 @@
 
 ## Metrics 배치
 
+DB 검색 분석 화면에서 조회할 수 있는 데이터를 배치 핸들러를 통해 전달된다.
+
 #### Domain
     package com.aries.tutorial;
 
@@ -70,6 +72,8 @@
     MetricsDataAsBusiness data = (MetricsDataAsBusiness) batchData[i];
 
 ## Application Service 배치
+
+애플리케이션 현황 분석 화면에서 조회할 수 있는 데이터를 배치 핸들러를 통해 전달된다.
 
     package com.aries.tutorial;
 
