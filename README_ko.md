@@ -22,50 +22,12 @@
 
 #### preHandle 메소드
 
-사용자가 입력한 ID와 비밀번호를 기반으로 미리 구축해둔 인증 로직을 통해 검증한다. 만약에 인증이 실패한다면 null 값을 리턴하면 되고, 성공한다면 User 객체를 생성하여, 관련된 값들을 지정하여 리턴하면 된다.
+배치가 시작된 시간을 인자로 받으며, true를 리턴해야 proccess 메소드가 실행된다. 예를 들면 RDB에 저장되기 전에 테이블 스키마 생성시 사용된다.
 
-#### redirect 메소드
+#### proccess 메소드
 
-인증이 성공하면 사용자가 최초에 보여지는 화면을 redirect 메소드를 통해 정할 수 있다.
+BatchData 인터페이스 배열을 인자로 받으며, 배치 데이터 유형에 맞게 형 변환(Casting)해서 사용해야 한다.
 
-    package com.aries.tutorial;
-
-    import com.aries.extension.data.UserData;
-    import com.aries.extension.handler.LoginHandler;
-    import com.aries.extension.util.PropertyUtil;
-
-    public class LoginAdapter implements LoginHandler {
-        @Override
-        public UserData preHandle(String id, String password) {
-            System.out.println("[LoginAdapter] - " +
-                    PropertyUtil.getValue("login", "subject", "Unknown subject"));
-
-            if(id.equals("user1") && password.equals("password1")) {
-                return new UserData(id, password, "admin", "Tester");
-            }
-
-            return null;
-        }
-
-        @Override
-        public String redirect(String id, String password) {
-            return "/dashboard/realtimeAdmin";
-        }
-    }
-
-아래는 UserData 클래스의 프로퍼티 목록이며, 각각의 프로퍼티 값들은 제니퍼 사용자 DB에 저장되며 뷰서버 화면에서 확인할 수 있다.
-
-| 변수 타입 | 프로퍼티 이름 |
-|:-------|-------:|
-| String | id |
-| String | password |
-| String | groupId |
-| String | name |
-| String | email |
-| String | company |
-| String | dept |
-| String | jobTitle |
-| String | cellphone |
 
 ## 사용자 정의 옵션 사용하기
 
