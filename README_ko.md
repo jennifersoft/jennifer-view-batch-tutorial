@@ -48,9 +48,6 @@
 
         @Override
         public void process(BatchData[] batchData) {
-            System.out.println("[DomainMetricsBatch] - " +
-                    PropertyUtil.getValue("domain_metrics_batch", "subject", "Unknown subject"));
-
             for(int i = 0; i < batchData.length; i++) {
                 MetricsDataAsDomain data = (MetricsDataAsDomain) batchData[i];
             }
