@@ -28,7 +28,35 @@
 
 어댑터와 달리 클래스가 아닌 인터페이스(BatchData) 배열을 인자로 받으며, 배치 데이터 유형에 맞게 형 변환(Casting)해서 사용해야 한다.
 
-### Metrics 데이터
+## Metrics 배치
+
+#### Domain
+
+    package com.aries.tutorial;
+
+    import com.aries.extension.data.BatchData;
+    import com.aries.extension.data.batch.MetricsDataAsDomain;
+    import com.aries.extension.handler.BatchHandler;
+    import com.aries.extension.util.PropertyUtil;
+
+    public class DomainMetricsBatch implements BatchHandler {
+        @Override
+        public boolean preHandle(long batchTime) {
+            // TODO: Adding pre-processing code
+            return true;
+        }
+
+        @Override
+        public void process(BatchData[] batchData) {
+            System.out.println("[DomainMetricsBatch] - " +
+                    PropertyUtil.getValue("domain_metrics_batch", "subject", "Unknown subject"));
+
+            for(int i = 0; i < batchData.length; i++) {
+                MetricsDataAsDomain data = (MetricsDataAsDomain) batchData[i];
+            }
+        }
+    }
+
 
 
 ## 사용자 정의 옵션 사용하기
