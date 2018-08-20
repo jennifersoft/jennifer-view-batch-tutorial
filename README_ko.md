@@ -31,7 +31,6 @@
 ## Metrics 배치
 
 #### Domain
-
     package com.aries.tutorial;
 
     import com.aries.extension.data.BatchData;
@@ -48,12 +47,27 @@
 
         @Override
         public void process(BatchData[] batchData) {
+            System.out.println("[DomainMetricsBatch] - " +
+                    PropertyUtil.getValue("domain_metrics_batch", "subject", "Unknown subject"));
+
             for(int i = 0; i < batchData.length; i++) {
                 MetricsDataAsDomain data = (MetricsDataAsDomain) batchData[i];
+
+                System.out.println("Domain ID : " + data.domainId);
+                System.out.println("Domain Name : " + data.domainName);
+                System.out.println("Call Count : " + data.serviceCount);
+                System.out.println("Max TPS : " + data.maxTps);
+                System.out.println("Active Service : " + data.activeService);
+                System.out.println("Error Count : " + data.errorCount + "\n");
             }
         }
     }
 
+#### Instance
+    MetricsDataAsInstance data = (MetricsDataAsInstance) batchData[i];
+    
+#### Business
+    MetricsDataAsBusiness data = (MetricsDataAsBusiness) batchData[i];
 
 
 ## 사용자 정의 옵션 사용하기
