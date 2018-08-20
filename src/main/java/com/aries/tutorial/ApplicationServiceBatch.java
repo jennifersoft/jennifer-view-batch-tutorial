@@ -14,8 +14,8 @@ public class ApplicationServiceBatch implements BatchHandler {
 
     @Override
     public void process(BatchData[] batchData) {
-        System.out.println("[BusinessMetricsBatch] - " +
-                PropertyUtil.getValue("business_metrics_batch", "subject", "Unknown subject"));
+        System.out.println("[ApplicationServiceBatch] - " +
+                PropertyUtil.getValue("application_service_batch", "subject", "Unknown subject"));
 
         for(int i = 0; i < batchData.length; i++) {
             ApplicationServiceData data = (ApplicationServiceData) batchData[i];
