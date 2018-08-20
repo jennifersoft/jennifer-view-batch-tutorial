@@ -25,7 +25,7 @@ public class InstanceMetricsBatch implements BatchHandler {
             System.out.println("Call Count : " + data.serviceCount);
             System.out.println("Max TPS : " + data.maxTps);
             System.out.println("Active Service : " + data.activeService);
-            System.out.println("Error Count : " + data.errorCount);
+            System.out.println("Error Count : " + data.errorCount + "\n");
         }
     }
 }

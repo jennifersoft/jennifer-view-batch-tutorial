@@ -25,7 +25,7 @@ public class ApplicationServiceBatch implements BatchHandler {
             System.out.println("Instance Name : " + data.instanceName);
             System.out.println("Application Name : " + data.applicationName);
             System.out.println("Call Count : " + data.callCount);
-            System.out.println("Failure Count : " + data.failureCount);
+            System.out.println("Failure Count : " + data.failureCount + "\n");
         }
     }
 }
