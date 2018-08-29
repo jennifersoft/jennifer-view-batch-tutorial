@@ -68,10 +68,14 @@ public class DomainMetricsBatch implements BatchHandler {
 ```
 
 #### Instance
+```java
 MetricsDataAsInstance data = (MetricsDataAsInstance) batchData[i];
+```
 
 #### Business
+```java
 MetricsDataAsBusiness data = (MetricsDataAsBusiness) batchData[i];
+```
 
 ## Application Service 배치
 
