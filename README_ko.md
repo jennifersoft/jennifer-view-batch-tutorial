@@ -33,79 +33,83 @@
 DB 검색 분석 화면에서 조회할 수 있는 데이터를 배치 핸들러를 통해 전달된다.
 
 #### Domain
-    package com.aries.tutorial;
+```java
+package com.aries.tutorial;
 
-    import com.aries.extension.data.BatchData;
-    import com.aries.extension.data.batch.MetricsDataAsDomain;
-    import com.aries.extension.handler.BatchHandler;
-    import com.aries.extension.util.PropertyUtil;
+import com.aries.extension.data.BatchData;
+import com.aries.extension.data.batch.MetricsDataAsDomain;
+import com.aries.extension.handler.BatchHandler;
+import com.aries.extension.util.PropertyUtil;
 
-    public class DomainMetricsBatch implements BatchHandler {
-        @Override
-        public boolean preHandle(long batchTime) {
-            // TODO: Adding pre-processing code
-            return true;
-        }
-
-        @Override
-        public void process(BatchData[] batchData) {
-            System.out.println("[DomainMetricsBatch] - " +
-                    PropertyUtil.getValue("domain_metrics_batch", "subject", "Unknown subject"));
-
-            for(int i = 0; i < batchData.length; i++) {
-                MetricsDataAsDomain data = (MetricsDataAsDomain) batchData[i];
-
-                System.out.println("Domain ID : " + data.domainId);
-                System.out.println("Domain Name : " + data.domainName);
-                System.out.println("Call Count : " + data.serviceCount);
-                System.out.println("Max TPS : " + data.maxTps);
-                System.out.println("Active Service : " + data.activeService);
-                System.out.println("Error Count : " + data.errorCount + "\n");
-            }
-        }
+public class DomainMetricsBatch implements BatchHandler {
+    @Override
+    public boolean preHandle(long batchTime) {
+        // TODO: Adding pre-processing code
+        return true;
     }
 
+    @Override
+    public void process(BatchData[] batchData) {
+        System.out.println("[DomainMetricsBatch] - " +
+                PropertyUtil.getValue("domain_metrics_batch", "subject", "Unknown subject"));
+
+        for(int i = 0; i < batchData.length; i++) {
+            MetricsDataAsDomain data = (MetricsDataAsDomain) batchData[i];
+
+            System.out.println("Domain ID : " + data.domainId);
+            System.out.println("Domain Name : " + data.domainName);
+            System.out.println("Call Count : " + data.serviceCount);
+            System.out.println("Max TPS : " + data.maxTps);
+            System.out.println("Active Service : " + data.activeService);
+            System.out.println("Error Count : " + data.errorCount + "\n");
+        }
+    }
+}
+```
+
 #### Instance
-    MetricsDataAsInstance data = (MetricsDataAsInstance) batchData[i];
-    
+MetricsDataAsInstance data = (MetricsDataAsInstance) batchData[i];
+
 #### Business
-    MetricsDataAsBusiness data = (MetricsDataAsBusiness) batchData[i];
+MetricsDataAsBusiness data = (MetricsDataAsBusiness) batchData[i];
 
 ## Application Service 배치
 
 애플리케이션 현황 분석 화면에서 조회할 수 있는 데이터를 배치 핸들러를 통해 전달된다. 참고로 어댑터 및 실험실 관리 화면에서 설정을 통해 일일 또는 시간당 데이터로 분기해서 보낼 수 있다.
 
-    package com.aries.tutorial;
+```java
+package com.aries.tutorial;
 
-    import com.aries.extension.data.BatchData;
-    import com.aries.extension.data.batch.ApplicationServiceData;
-    import com.aries.extension.handler.BatchHandler;
-    import com.aries.extension.util.PropertyUtil;
+import com.aries.extension.data.BatchData;
+import com.aries.extension.data.batch.ApplicationServiceData;
+import com.aries.extension.handler.BatchHandler;
+import com.aries.extension.util.PropertyUtil;
 
-    public class ApplicationServiceBatch implements BatchHandler {
-        @Override
-        public boolean preHandle(long batchTime) {
-            // TODO: Adding pre-processing code
-            return true;
-        }
+public class ApplicationServiceBatch implements BatchHandler {
+    @Override
+    public boolean preHandle(long batchTime) {
+        // TODO: Adding pre-processing code
+        return true;
+    }
 
-        @Override
-        public void process(BatchData[] batchData) {
-            System.out.println("[ApplicationServiceBatch] - " +
-                    PropertyUtil.getValue("application_service_batch", "subject", "Unknown subject"));
+    @Override
+    public void process(BatchData[] batchData) {
+        System.out.println("[ApplicationServiceBatch] - " +
+                PropertyUtil.getValue("application_service_batch", "subject", "Unknown subject"));
 
-            for(int i = 0; i < batchData.length; i++) {
-                ApplicationServiceData data = (ApplicationServiceData) batchData[i];
+        for(int i = 0; i < batchData.length; i++) {
+            ApplicationServiceData data = (ApplicationServiceData) batchData[i];
 
-                System.out.println("Domain ID : " + data.domainId);
-                System.out.println("Domain Name : " + data.domainName);
-                System.out.println("Instance Name : " + data.instanceName);
-                System.out.println("Application Name : " + data.applicationName);
-                System.out.println("Call Count : " + data.callCount);
-                System.out.println("Failure Count : " + data.failureCount + "\n");
-            }
+            System.out.println("Domain ID : " + data.domainId);
+            System.out.println("Domain Name : " + data.domainName);
+            System.out.println("Instance Name : " + data.instanceName);
+            System.out.println("Application Name : " + data.applicationName);
+            System.out.println("Call Count : " + data.callCount);
+            System.out.println("Failure Count : " + data.failureCount + "\n");
         }
     }
+}
+```
 
 ## 사용자 정의 옵션 사용하기
 
@@ -120,5 +124,6 @@ DB 검색 분석 화면에서 조회할 수 있는 데이터를 배치 핸들러
 ## 뷰서버 옵션 사용하기
 
 제니퍼 뷰서버의 server_view.conf 설정 파일에 정의된 옵션 값을 어댑터 내에서 사용할 수 있다. 첫번째 매개변수는 키 이름이고, 두번째는 값이 없을 때, 반환되는 기본 값이다.
-
-    String db_path = com.aries.extension.util.ConfigUtil.getValue("db_path", "../db_view");
+```java
+String db_path = com.aries.extension.util.ConfigUtil.getValue("db_path", "../db_view");
+```
